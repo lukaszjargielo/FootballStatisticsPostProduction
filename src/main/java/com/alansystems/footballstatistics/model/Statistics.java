@@ -1,6 +1,6 @@
 package com.alansystems.footballstatistics.model;
 
-public class TeamStatistics {
+public class Statistics {
     private MatchResult lastMatchResult;
     private MatchResult secondLastMatchResult;
     private MatchResult thirdLastMatchResult;
@@ -10,7 +10,7 @@ public class TeamStatistics {
     private int sumOfGoalsScored;
     private int sumOfGoalsConceded;
 
-    public TeamStatistics(MatchResult lastMatchResult, MatchResult secondLastMatchResult, MatchResult thirdLastMatchResult, double averageAmountOfGoalsInTheTeamEvents, int numberOfPlayedEvents, int sumOfGainedPoints, int sumOfGoalsScored, int sumOfGoalsConceded) {
+    public Statistics(MatchResult lastMatchResult, MatchResult secondLastMatchResult, MatchResult thirdLastMatchResult, double averageAmountOfGoalsInTheTeamEvents, int numberOfPlayedEvents, int sumOfGainedPoints, int sumOfGoalsScored, int sumOfGoalsConceded) {
         this.lastMatchResult = lastMatchResult;
         this.secondLastMatchResult = secondLastMatchResult;
         this.thirdLastMatchResult = thirdLastMatchResult;
