@@ -1,6 +1,6 @@
 package com.alansystems.footballstatistics.model;
 
-public enum FootballResponseType {
+public enum MessageType {
     RESULT,
     GET_STATISTICS,
 }
