@@ -38,4 +38,13 @@ public class Message {
     public void setGetStatistics(Statistics getStatistics) {
         this.getStatistics = getStatistics;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "type=" + type +
+                ", result=" + result +
+                ", getStatistics=" + getStatistics +
+                '}';
+    }
 }
