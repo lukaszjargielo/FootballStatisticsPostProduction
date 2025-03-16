@@ -10,13 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonFileReader {
-    final static String FILE_PATH = "src/main/resources/data/messages_2.txt";
 
-    public static List<Message> JsonFileReader(String path) {
+    public static List<Message> readJsonFromFile(String path) {
         List<Message> messagesList = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;
 
             while ((line = reader.readLine()) != null) {
@@ -33,7 +32,7 @@ public class JsonFileReader {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error reading file: " + FILE_PATH);
+            System.out.println("Error reading file: " + path);
             e.printStackTrace();
         }
         return messagesList;
