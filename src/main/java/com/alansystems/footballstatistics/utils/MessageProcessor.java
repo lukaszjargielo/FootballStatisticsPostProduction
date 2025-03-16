@@ -21,14 +21,22 @@ public class MessageProcessor {
 
                 int gainedPointsHomeTeam = 0;
                 int gainedPointsAwayTeam = 0;
+                EventStatuses lastEventStatusHomeTeam;
+                EventStatuses lastEventStatusAwayTeam;
 
                 if (homeScore == awayScore) {
                     gainedPointsAwayTeam++;
                     gainedPointsHomeTeam++;
+                    lastEventStatusHomeTeam = EventStatuses.D;
+                    lastEventStatusAwayTeam = EventStatuses.D;
                 } else if (homeScore > awayScore) {
                     gainedPointsHomeTeam += 3;
+                    lastEventStatusHomeTeam = EventStatuses.W;
+                    lastEventStatusAwayTeam = EventStatuses.L;
                 } else {
                     gainedPointsAwayTeam += 3;
+                    lastEventStatusAwayTeam = EventStatuses.W;
+                    lastEventStatusHomeTeam = EventStatuses.L;
                 }
 
                 if (!mapWithTeamInformation.containsKey(homeTeam)) {
@@ -51,7 +59,8 @@ public class MessageProcessor {
                     existingObject.setSumOfGoalsConceded(existingObject.getSumOfGoalsConceded() + homeScore);
                 }
             } else if (message.getType().equals(MessageType.GET_STATISTICS)) {
-
+                TeamListForStatistics teamListForStatistics = message.getGetStatistics();
+                List<String> teams = teamListForStatistics.getTeams();
             }
         }
 
