@@ -2,10 +2,10 @@ package com.alansystems.footballstatistics.model;
 
 import java.util.List;
 
-public class StatisticsRequest {
+public class TeamListForStatistics {
     private List<String> teams;
 
-    public StatisticsRequest(List<String> teams) {
+    public TeamListForStatistics(List<String> teams) {
         this.teams = teams;
     }
 

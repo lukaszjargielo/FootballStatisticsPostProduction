@@ -2,7 +2,7 @@
 
 ### Package Model:
 
-#### Enum `MatchResult`:
+#### Enum `MatchStatuses`:
 - **W** - Win
 - **L** - Lose
 - **D** - Draw

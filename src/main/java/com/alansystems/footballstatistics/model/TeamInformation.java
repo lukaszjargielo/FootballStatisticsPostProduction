@@ -1,14 +1,14 @@
 package com.alansystems.footballstatistics.model;
 
 
-public class Team {
+public class TeamInformation {
     private final String name;
     private int numberOfPlayedEvents;
     private int sumOfGainedPoints;
     private int sumOfGoalsScored;
     private int sumOfGoalsConceded;
 
-    public Team(String name, int numberOfPlayedEvents, int sumOfGainedPoints, int sumOfGoalsScored, int sumOfGoalsConceded) {
+    public TeamInformation(String name, int numberOfPlayedEvents, int sumOfGainedPoints, int sumOfGoalsScored, int sumOfGoalsConceded) {
         this.name = name;
         this.numberOfPlayedEvents = numberOfPlayedEvents;
         this.sumOfGainedPoints = sumOfGainedPoints;

@@ -1,6 +1,6 @@
 package com.alansystems.footballstatistics.model;
 
-public enum MatchResult {
+public enum EventStatuses {
     W,
     L,
     D

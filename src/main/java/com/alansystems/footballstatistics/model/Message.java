@@ -1,25 +1,25 @@
 package com.alansystems.footballstatistics.model;
 
 public class Message {
-    private FootballResponseType type;
+    private MessageType type;
     private EventResult result;
-    private Statistics getStatistics;
+    private TeamStatistics getTeamStatistics;
 
-    public Message(FootballResponseType type, EventResult eventResult) {
+    public Message(MessageType type, EventResult eventResult) {
         this.type = type;
         this.result = eventResult;
     }
 
-    public Message(FootballResponseType type, Statistics statistics) {
+    public Message(MessageType type, TeamStatistics teamStatistics) {
         this.type = type;
-        this.getStatistics = statistics;
+        this.getTeamStatistics = teamStatistics;
     }
 
-    public FootballResponseType getType() {
+    public MessageType getType() {
         return type;
     }
 
-    public void setType(FootballResponseType type) {
+    public void setType(MessageType type) {
         this.type = type;
     }
 
@@ -31,12 +31,12 @@ public class Message {
         this.result = result;
     }
 
-    public Statistics getGetStatistics() {
-        return getStatistics;
+    public TeamStatistics getGetStatistics() {
+        return getTeamStatistics;
     }
 
-    public void setGetStatistics(Statistics getStatistics) {
-        this.getStatistics = getStatistics;
+    public void setGetStatistics(TeamStatistics getTeamStatistics) {
+        this.getTeamStatistics = getTeamStatistics;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Message {
         return "Message{" +
                 "type=" + type +
                 ", result=" + result +
-                ", getStatistics=" + getStatistics +
+                ", getStatistics=" + getTeamStatistics +
                 '}';
     }
 }

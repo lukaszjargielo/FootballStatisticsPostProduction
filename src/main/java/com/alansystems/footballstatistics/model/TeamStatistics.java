@@ -1,19 +1,19 @@
 package com.alansystems.footballstatistics.model;
 
-public class Statistics {
-    private MatchResult lastMatchResult;
-    private MatchResult secondLastMatchResult;
-    private MatchResult thirdLastMatchResult;
+public class TeamStatistics {
+    private EventStatuses lastEventStatuses;
+    private EventStatuses secondLastEventStatuses;
+    private EventStatuses thirdLastEventStatuses;
     private double averageAmountOfGoalsInAllEvents; // sum of scored and conceded
     private int numberOfPlayedEvents;
     private int sumOfGainedPoints;
     private int sumOfGoalsScored;
     private int sumOfGoalsConceded;
 
-    public Statistics(MatchResult lastMatchResult, MatchResult secondLastMatchResult, MatchResult thirdLastMatchResult, double averageAmountOfGoalsInTheTeamEvents, int numberOfPlayedEvents, int sumOfGainedPoints, int sumOfGoalsScored, int sumOfGoalsConceded) {
-        this.lastMatchResult = lastMatchResult;
-        this.secondLastMatchResult = secondLastMatchResult;
-        this.thirdLastMatchResult = thirdLastMatchResult;
+    public TeamStatistics(EventStatuses lastEventStatuses, EventStatuses secondLastEventStatuses, EventStatuses thirdLastEventStatuses, double averageAmountOfGoalsInTheTeamEvents, int numberOfPlayedEvents, int sumOfGainedPoints, int sumOfGoalsScored, int sumOfGoalsConceded) {
+        this.lastEventStatuses = lastEventStatuses;
+        this.secondLastEventStatuses = secondLastEventStatuses;
+        this.thirdLastEventStatuses = thirdLastEventStatuses;
         this.averageAmountOfGoalsInAllEvents = averageAmountOfGoalsInTheTeamEvents;
         this.numberOfPlayedEvents = numberOfPlayedEvents;
         this.sumOfGainedPoints = sumOfGainedPoints;
@@ -21,28 +21,28 @@ public class Statistics {
         this.sumOfGoalsConceded = sumOfGoalsConceded;
     }
 
-    public MatchResult getLastMatchResult() {
-        return lastMatchResult;
+    public EventStatuses getLastMatchResult() {
+        return lastEventStatuses;
     }
 
-    public void setLastMatchResult(MatchResult lastMatchResult) {
-        this.lastMatchResult = lastMatchResult;
+    public void setLastMatchResult(EventStatuses lastEventStatuses) {
+        this.lastEventStatuses = lastEventStatuses;
     }
 
-    public MatchResult getSecondLastMatchResult() {
-        return secondLastMatchResult;
+    public EventStatuses getSecondLastMatchResult() {
+        return secondLastEventStatuses;
     }
 
-    public void setSecondLastMatchResult(MatchResult secondLastMatchResult) {
-        this.secondLastMatchResult = secondLastMatchResult;
+    public void setSecondLastMatchResult(EventStatuses secondLastEventStatuses) {
+        this.secondLastEventStatuses = secondLastEventStatuses;
     }
 
-    public MatchResult getThirdLastMatchResult() {
-        return thirdLastMatchResult;
+    public EventStatuses getThirdLastMatchResult() {
+        return thirdLastEventStatuses;
     }
 
-    public void setThirdLastMatchResult(MatchResult thirdLastMatchResult) {
-        this.thirdLastMatchResult = thirdLastMatchResult;
+    public void setThirdLastMatchResult(EventStatuses thirdLastEventStatuses) {
+        this.thirdLastEventStatuses = thirdLastEventStatuses;
     }
 
     public double getAverageAmountOfGoalsInTheTeamEvents() {
