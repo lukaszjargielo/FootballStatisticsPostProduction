@@ -1,5 +1,6 @@
 package com.alansystems.footballstatistics.model;
 
+
 public class TeamStatistics {
     private EventStatuses lastEventStatuses;
     private EventStatuses secondLastEventStatuses;

@@ -1,5 +1,7 @@
 package com.alansystems.footballstatistics.model;
 
+import org.springframework.stereotype.Component;
+
 
 public class TeamInformation {
     private final String name;

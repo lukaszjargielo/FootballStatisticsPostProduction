@@ -2,6 +2,8 @@ package com.alansystems.footballstatistics.utils;
 
 import com.alansystems.footballstatistics.model.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,11 +11,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JsonFileReader {
 
-    public static List<Message> readJsonFromFile(String path) {
+    private final ObjectMapper mapper;
+
+    public JsonFileReader(ObjectMapper mapper) {
+        this.mapper = mapper;
+    }
+
+    public List<Message> readJsonFromFile(String path) {
         List<Message> messagesList = new ArrayList<>();
-        ObjectMapper mapper = new ObjectMapper();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;
@@ -23,9 +31,6 @@ public class JsonFileReader {
                     Message message = mapper.readValue(line, Message.class);
                     messagesList.add(message);
 
-                    for (Message m : messagesList) {
-                        System.out.println(m);
-                    }
                 } catch (IOException e) {
                     System.out.println("Error parsing line: " + line);
                     e.printStackTrace();
