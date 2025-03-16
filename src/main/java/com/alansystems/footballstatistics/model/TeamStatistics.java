@@ -1,7 +1,7 @@
 package com.alansystems.footballstatistics.model;
 
 
-public class TeamStatistics {
+public class TeamStatistics implements TeamData{
     private EventStatuses lastEventStatuses;
     private EventStatuses secondLastEventStatuses;
     private EventStatuses thirdLastEventStatuses;

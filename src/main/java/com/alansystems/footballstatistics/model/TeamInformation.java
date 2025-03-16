@@ -3,7 +3,7 @@ package com.alansystems.footballstatistics.model;
 import org.springframework.stereotype.Component;
 
 
-public class TeamInformation {
+public class TeamInformation implements TeamData{
     private final String name;
     private int numberOfPlayedEvents;
     private int sumOfGainedPoints;
