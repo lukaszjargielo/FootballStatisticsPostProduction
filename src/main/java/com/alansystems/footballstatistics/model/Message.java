@@ -3,7 +3,7 @@ package com.alansystems.footballstatistics.model;
 public class Message {
     private MessageType type;
     private EventResult result;
-    private TeamStatistics getTeamStatistics;
+    private TeamStatistics getStatistics;
 
     public Message(MessageType type, EventResult eventResult) {
         this.type = type;
@@ -12,7 +12,7 @@ public class Message {
 
     public Message(MessageType type, TeamStatistics teamStatistics) {
         this.type = type;
-        this.getTeamStatistics = teamStatistics;
+        this.getStatistics = teamStatistics;
     }
 
     public MessageType getType() {
@@ -32,11 +32,11 @@ public class Message {
     }
 
     public TeamStatistics getGetStatistics() {
-        return getTeamStatistics;
+        return getStatistics;
     }
 
     public void setGetStatistics(TeamStatistics getTeamStatistics) {
-        this.getTeamStatistics = getTeamStatistics;
+        this.getStatistics = getTeamStatistics;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class Message {
         return "Message{" +
                 "type=" + type +
                 ", result=" + result +
-                ", getStatistics=" + getTeamStatistics +
+                ", getStatistics=" + getStatistics +
                 '}';
     }
 }
