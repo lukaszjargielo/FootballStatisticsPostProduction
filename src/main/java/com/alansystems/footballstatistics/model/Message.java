@@ -1,13 +1,17 @@
 package com.alansystems.footballstatistics.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Message {
     private MessageType type;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private EventResult result;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("get_statistics")
     private TeamListForStatistics getStatistics;
 
@@ -23,8 +27,6 @@ public class Message {
         this.type = type;
         this.getStatistics = teamStatistics;
     }
-
-
 
     public MessageType getType() {
         return type;
@@ -52,10 +54,25 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
-                "type=" + type +
-                ", result=" + result +
-                ", getStatistics=" + getStatistics +
-                '}';
+        StringBuilder sb = new StringBuilder("Message{");
+
+        if (type != null) {
+            sb.append("type=").append(type).append(", ");
+        }
+
+        if (result != null) {
+            sb.append("result=").append(result).append(", ");
+        }
+
+        if (getStatistics != null) {
+            sb.append("getStatistics=").append(getStatistics);
+        }
+
+        if (sb.charAt(sb.length() - 1) == ' ') {
+            sb.delete(sb.length() - 2, sb.length());
+        }
+
+        sb.append('}');
+        return sb.toString();
     }
 }
