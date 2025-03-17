@@ -1,7 +1,8 @@
 package com.alansystems.footballstatistics.model;
 
 
-public class TeamStatistics implements TeamData{
+public class TeamStatistics {
+    private String name;
     private EventStatuses lastEventStatuses;
     private EventStatuses secondLastEventStatuses;
     private EventStatuses thirdLastEventStatuses;
@@ -11,7 +12,8 @@ public class TeamStatistics implements TeamData{
     private int sumOfGoalsScored;
     private int sumOfGoalsConceded;
 
-    public TeamStatistics(EventStatuses lastEventStatuses, EventStatuses secondLastEventStatuses, EventStatuses thirdLastEventStatuses, double averageAmountOfGoalsInTheTeamEvents, int numberOfPlayedEvents, int sumOfGainedPoints, int sumOfGoalsScored, int sumOfGoalsConceded) {
+    public TeamStatistics(String name, EventStatuses lastEventStatuses, EventStatuses secondLastEventStatuses, EventStatuses thirdLastEventStatuses, double averageAmountOfGoalsInTheTeamEvents, int numberOfPlayedEvents, int sumOfGainedPoints, int sumOfGoalsScored, int sumOfGoalsConceded) {
+        this.name = name;
         this.lastEventStatuses = lastEventStatuses;
         this.secondLastEventStatuses = secondLastEventStatuses;
         this.thirdLastEventStatuses = thirdLastEventStatuses;
@@ -20,6 +22,14 @@ public class TeamStatistics implements TeamData{
         this.sumOfGainedPoints = sumOfGainedPoints;
         this.sumOfGoalsScored = sumOfGoalsScored;
         this.sumOfGoalsConceded = sumOfGoalsConceded;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public EventStatuses getLastMatchResult() {
@@ -85,4 +95,34 @@ public class TeamStatistics implements TeamData{
     public void setSumOfGoalsConceded(int sumOfGoalsConceded) {
         this.sumOfGoalsConceded = sumOfGoalsConceded;
     }
+
+    @Override
+    public String toString() {
+        return "TeamStatistics{" +
+                "name='" + name + '\'' +
+                ", lastEventStatuses=" + lastEventStatuses +
+                ", secondLastEventStatuses=" + secondLastEventStatuses +
+                ", thirdLastEventStatuses=" + thirdLastEventStatuses +
+                ", averageAmountOfGoalsInAllEvents=" + averageAmountOfGoalsInAllEvents +
+                ", numberOfPlayedEvents=" + numberOfPlayedEvents +
+                ", sumOfGainedPoints=" + sumOfGainedPoints +
+                ", sumOfGoalsScored=" + sumOfGoalsScored +
+                ", sumOfGoalsConceded=" + sumOfGoalsConceded +
+                '}';
+    }
+
+    public static void printSimpleStatistics(TeamStatistics teamStatistics) {
+        System.out.println(teamStatistics.getName() + " " + teamStatistics.getNumberOfPlayedEvents() + " "
+                + teamStatistics.getSumOfGainedPoints() + " " + teamStatistics.getSumOfGoalsScored() + " "
+                + teamStatistics.getSumOfGoalsConceded());
+    }
+
+    public static void printAdvancedStatistics(TeamStatistics teamStatistics) {
+        System.out.println(teamStatistics.getName() + " " + teamStatistics.getThirdLastMatchResult() + teamStatistics.getSecondLastMatchResult() + teamStatistics.getLastMatchResult() + " "
+                + teamStatistics.getAverageAmountOfGoalsInTheTeamEvents() + " "
+                + teamStatistics.getNumberOfPlayedEvents() + " "
+                + teamStatistics.getSumOfGainedPoints() + " " + teamStatistics.getSumOfGoalsScored() + " "
+                + teamStatistics.getSumOfGoalsConceded());
+    }
+
 }
