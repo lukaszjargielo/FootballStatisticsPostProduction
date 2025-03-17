@@ -24,18 +24,17 @@ public class MessageProcessor {
                 int homeScore = eventResult.getHomeScore();
                 int awayScore = eventResult.getAwayScore();
 
-                int homeTeamGainedPoints = 0;
-                int awayTeamGainedPoints = 0;
+                TeamStatistics homeTeamObj = null;
+                TeamStatistics awayTeamObj = null;
 
-                int numberOfPlayedEvents = 1;
+                int homeTeamNumberOfPlayedEvents = 1;
+                int awayTeamNumberOfPlayedEvents = 1;
 
-                int sumOfGoalsInEvent = homeScore + awayScore;
+                int homeTeamSumOfGoalsScored = homeScore;
+                int awayTeamSumOfGoalsScored = awayScore;
 
-                double homeTeamAverageAmountOfGoalsInAllEvents;
-                homeTeamAverageAmountOfGoalsInAllEvents = sumOfGoalsInEvent / numberOfPlayedEvents;
-
-                double awayTeamAverageAmountOfGoalsInAllEvents;
-                awayTeamAverageAmountOfGoalsInAllEvents = sumOfGoalsInEvent / numberOfPlayedEvents;
+                int homeTeamSumOfGoalsConceded = awayScore;
+                int awayTeamSumOfGoalsConceded = homeScore;
 
                 EventStatuses homeTeamLastEventStatus = null;
                 EventStatuses homeTeamSecondLastEventStatus = null;
@@ -44,6 +43,33 @@ public class MessageProcessor {
                 EventStatuses awayTeamLastEventStatus = null;
                 EventStatuses awayTeamSecondLastEventStatus = null;
                 EventStatuses awayTeamThirdLastEventStatus = null;
+
+                if (mapWithTeamStatistics.containsKey(homeTeam)) {
+                    homeTeamObj = mapWithTeamStatistics.get(homeTeam);
+                    homeTeamNumberOfPlayedEvents = homeTeamObj.getNumberOfPlayedEvents() + homeTeamNumberOfPlayedEvents;
+                    homeTeamSumOfGoalsScored = homeTeamObj.getSumOfGoalsScored() + homeTeamSumOfGoalsScored;
+                    homeTeamSumOfGoalsConceded = homeTeamObj.getSumOfGoalsConceded() + homeTeamSumOfGoalsConceded;
+                    homeTeamThirdLastEventStatus = homeTeamObj.getSecondLastMatchResult();
+                    homeTeamSecondLastEventStatus = homeTeamObj.getLastMatchResult();
+                }
+
+                if (mapWithTeamStatistics.containsKey(awayTeam)) {
+                    awayTeamObj = mapWithTeamStatistics.get(awayTeam);
+                    awayTeamNumberOfPlayedEvents = awayTeamObj.getNumberOfPlayedEvents() + awayTeamNumberOfPlayedEvents;
+                    awayTeamSumOfGoalsScored = awayTeamObj.getSumOfGoalsScored() + awayTeamSumOfGoalsScored;
+                    awayTeamSumOfGoalsConceded = awayTeamObj.getSumOfGoalsConceded() + awayTeamSumOfGoalsConceded;
+                    awayTeamThirdLastEventStatus = awayTeamObj.getSecondLastMatchResult();
+                    awayTeamSecondLastEventStatus = awayTeamObj.getLastMatchResult();
+                }
+
+                int homeTeamGainedPoints = 0;
+                int awayTeamGainedPoints = 0;
+
+                double homeTeamAverageAmountOfGoalsInAllEvents;
+                homeTeamAverageAmountOfGoalsInAllEvents = Math.round((homeTeamSumOfGoalsScored + homeTeamSumOfGoalsConceded) * 1.0 / homeTeamNumberOfPlayedEvents * 100.0) / 100.0;
+
+                double awayTeamAverageAmountOfGoalsInAllEvents;
+                awayTeamAverageAmountOfGoalsInAllEvents = Math.round((awayTeamSumOfGoalsScored + awayTeamSumOfGoalsConceded) * 1.0 / awayTeamNumberOfPlayedEvents * 100.0) / 100.0;
 
                 if (homeScore == awayScore) {
                     awayTeamGainedPoints++;
@@ -65,7 +91,7 @@ public class MessageProcessor {
                 }
 
                 if (!mapWithTeamStatistics.containsKey(homeTeam)) {
-                    mapWithTeamStatistics.put(homeTeam, new TeamStatistics(homeTeam, homeTeamLastEventStatus, homeTeamSecondLastEventStatus, homeTeamThirdLastEventStatus, homeTeamAverageAmountOfGoalsInAllEvents, numberOfPlayedEvents, homeTeamGainedPoints, homeScore, awayScore));
+                    mapWithTeamStatistics.put(homeTeam, new TeamStatistics(homeTeam, homeTeamLastEventStatus, homeTeamSecondLastEventStatus, homeTeamThirdLastEventStatus, homeTeamAverageAmountOfGoalsInAllEvents, homeTeamNumberOfPlayedEvents, homeTeamGainedPoints, homeScore, awayScore));
                     printSimpleStatistics(mapWithTeamStatistics.get(homeTeam));
                 } else {
                     TeamStatistics existingObject = mapWithTeamStatistics.get(homeTeam);
@@ -74,7 +100,7 @@ public class MessageProcessor {
                     existingObject.setSecondLastMatchResult(existingObject.getLastMatchResult());
                     existingObject.setLastMatchResult(homeTeamLastEventStatus);
 
-                    existingObject.setNumberOfPlayedEvents(existingObject.getNumberOfPlayedEvents() + numberOfPlayedEvents);
+                    existingObject.setNumberOfPlayedEvents(existingObject.getNumberOfPlayedEvents() + homeTeamNumberOfPlayedEvents);
 
                     existingObject.setSumOfGainedPoints(existingObject.getSumOfGainedPoints() + homeTeamGainedPoints);
 
@@ -88,7 +114,7 @@ public class MessageProcessor {
                 }
 
                 if (!mapWithTeamStatistics.containsKey(awayTeam)) {
-                    mapWithTeamStatistics.put(awayTeam, new TeamStatistics(awayTeam, awayTeamLastEventStatus, awayTeamSecondLastEventStatus, awayTeamThirdLastEventStatus, awayTeamAverageAmountOfGoalsInAllEvents, numberOfPlayedEvents, awayTeamGainedPoints, awayScore, homeScore));
+                    mapWithTeamStatistics.put(awayTeam, new TeamStatistics(awayTeam, awayTeamLastEventStatus, awayTeamSecondLastEventStatus, awayTeamThirdLastEventStatus, awayTeamAverageAmountOfGoalsInAllEvents, awayTeamNumberOfPlayedEvents, awayTeamGainedPoints, awayScore, homeScore));
                     printSimpleStatistics(mapWithTeamStatistics.get(awayTeam));
                 } else {
                     TeamStatistics existingObject = mapWithTeamStatistics.get(awayTeam);
@@ -97,7 +123,7 @@ public class MessageProcessor {
                     existingObject.setSecondLastMatchResult(existingObject.getLastMatchResult());
                     existingObject.setLastMatchResult(awayTeamLastEventStatus);
 
-                    existingObject.setNumberOfPlayedEvents(existingObject.getNumberOfPlayedEvents() + numberOfPlayedEvents);
+                    existingObject.setNumberOfPlayedEvents(existingObject.getNumberOfPlayedEvents() + awayTeamNumberOfPlayedEvents);
 
                     existingObject.setSumOfGainedPoints(existingObject.getSumOfGainedPoints() + awayTeamGainedPoints);
 

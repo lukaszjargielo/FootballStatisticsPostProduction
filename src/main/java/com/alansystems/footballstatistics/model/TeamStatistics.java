@@ -118,7 +118,18 @@ public class TeamStatistics {
     }
 
     public static void printAdvancedStatistics(TeamStatistics teamStatistics) {
-        System.out.println(teamStatistics.getName() + " " + teamStatistics.getThirdLastMatchResult() + teamStatistics.getSecondLastMatchResult() + teamStatistics.getLastMatchResult() + " "
+        StringBuilder result = new StringBuilder();
+
+        if (teamStatistics.getThirdLastMatchResult() != null) {
+            result.append(teamStatistics.getThirdLastMatchResult());
+        }
+        if (teamStatistics.getSecondLastMatchResult() != null) {
+            result.append(teamStatistics.getSecondLastMatchResult());
+        }
+        if (teamStatistics.getLastMatchResult() != null) {
+            result.append(teamStatistics.getLastMatchResult());
+        }
+        System.out.println(teamStatistics.getName() + " " + result + " "
                 + teamStatistics.getAverageAmountOfGoalsInTheTeamEvents() + " "
                 + teamStatistics.getNumberOfPlayedEvents() + " "
                 + teamStatistics.getSumOfGainedPoints() + " " + teamStatistics.getSumOfGoalsScored() + " "
