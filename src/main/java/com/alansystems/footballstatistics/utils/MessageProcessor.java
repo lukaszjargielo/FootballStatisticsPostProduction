@@ -24,52 +24,62 @@ public class MessageProcessor {
                 int homeScore = eventResult.getHomeScore();
                 int awayScore = eventResult.getAwayScore();
 
-                TeamStatistics homeTeamObj = null;
-                TeamStatistics awayTeamObj = null;
+                TeamStatistics homeTeamObj;
+                TeamStatistics awayTeamObj;
 
-                int homeTeamNumberOfPlayedEvents = 1;
-                int awayTeamNumberOfPlayedEvents = 1;
-
-                int homeTeamSumOfGoalsScored = homeScore;
-                int awayTeamSumOfGoalsScored = awayScore;
-
-                int homeTeamSumOfGoalsConceded = awayScore;
-                int awayTeamSumOfGoalsConceded = homeScore;
-
-                EventStatuses homeTeamLastEventStatus = null;
-                EventStatuses homeTeamSecondLastEventStatus = null;
-                EventStatuses homeTeamThirdLastEventStatus = null;
-
-                EventStatuses awayTeamLastEventStatus = null;
-                EventStatuses awayTeamSecondLastEventStatus = null;
-                EventStatuses awayTeamThirdLastEventStatus = null;
-
-                if (mapWithTeamStatistics.containsKey(homeTeam)) {
+                if (!mapWithTeamStatistics.containsKey(homeTeam)) {
+                    mapWithTeamStatistics.put(homeTeam,
+                            new TeamStatistics(homeTeam,
+                                    null,
+                                    null,
+                                    null,
+                                    0.0,
+                                    1,
+                                    0,
+                                    homeScore,
+                                    awayScore));
                     homeTeamObj = mapWithTeamStatistics.get(homeTeam);
-                    homeTeamNumberOfPlayedEvents = homeTeamObj.getNumberOfPlayedEvents() + homeTeamNumberOfPlayedEvents;
-                    homeTeamSumOfGoalsScored = homeTeamObj.getSumOfGoalsScored() + homeTeamSumOfGoalsScored;
-                    homeTeamSumOfGoalsConceded = homeTeamObj.getSumOfGoalsConceded() + homeTeamSumOfGoalsConceded;
-                    homeTeamThirdLastEventStatus = homeTeamObj.getSecondLastMatchResult();
-                    homeTeamSecondLastEventStatus = homeTeamObj.getLastMatchResult();
+                } else {
+                    homeTeamObj = mapWithTeamStatistics.get(homeTeam);
+
+                    homeTeamObj.setThirdLastMatchResult(homeTeamObj.getSecondLastMatchResult());
+                    homeTeamObj.setSecondLastMatchResult(homeTeamObj.getLastMatchResult());
+
+                    homeTeamObj.setNumberOfPlayedEvents(homeTeamObj.getNumberOfPlayedEvents() + 1);
+
+                    homeTeamObj.setSumOfGoalsScored(homeTeamObj.getSumOfGoalsScored() + homeScore);
+                    homeTeamObj.setSumOfGoalsConceded(homeTeamObj.getSumOfGoalsConceded() + awayScore);
                 }
 
-                if (mapWithTeamStatistics.containsKey(awayTeam)) {
+                if (!mapWithTeamStatistics.containsKey(awayTeam)) {
+                    mapWithTeamStatistics.put(awayTeam,
+                            new TeamStatistics(awayTeam,
+                                    null,
+                                    null,
+                                    null,
+                                    0.0,
+                                    1,
+                                    0,
+                                    awayScore,
+                                    homeScore));
                     awayTeamObj = mapWithTeamStatistics.get(awayTeam);
-                    awayTeamNumberOfPlayedEvents = awayTeamObj.getNumberOfPlayedEvents() + awayTeamNumberOfPlayedEvents;
-                    awayTeamSumOfGoalsScored = awayTeamObj.getSumOfGoalsScored() + awayTeamSumOfGoalsScored;
-                    awayTeamSumOfGoalsConceded = awayTeamObj.getSumOfGoalsConceded() + awayTeamSumOfGoalsConceded;
-                    awayTeamThirdLastEventStatus = awayTeamObj.getSecondLastMatchResult();
-                    awayTeamSecondLastEventStatus = awayTeamObj.getLastMatchResult();
+                } else {
+                    awayTeamObj = mapWithTeamStatistics.get(awayTeam);
+
+                    awayTeamObj.setThirdLastMatchResult(awayTeamObj.getSecondLastMatchResult());
+                    awayTeamObj.setSecondLastMatchResult(awayTeamObj.getLastMatchResult());
+
+                    awayTeamObj.setNumberOfPlayedEvents(awayTeamObj.getNumberOfPlayedEvents() + 1);
+
+                    awayTeamObj.setSumOfGoalsScored(awayTeamObj.getSumOfGoalsScored() + awayScore);
+                    awayTeamObj.setSumOfGoalsConceded(awayTeamObj.getSumOfGoalsConceded() + homeScore);
                 }
 
                 int homeTeamGainedPoints = 0;
                 int awayTeamGainedPoints = 0;
 
-                double homeTeamAverageAmountOfGoalsInAllEvents;
-                homeTeamAverageAmountOfGoalsInAllEvents = Math.round((homeTeamSumOfGoalsScored + homeTeamSumOfGoalsConceded) * 1.0 / homeTeamNumberOfPlayedEvents * 100.0) / 100.0;
-
-                double awayTeamAverageAmountOfGoalsInAllEvents;
-                awayTeamAverageAmountOfGoalsInAllEvents = Math.round((awayTeamSumOfGoalsScored + awayTeamSumOfGoalsConceded) * 1.0 / awayTeamNumberOfPlayedEvents * 100.0) / 100.0;
+                EventStatuses homeTeamLastEventStatus = null;
+                EventStatuses awayTeamLastEventStatus = null;
 
                 if (homeScore == awayScore) {
                     awayTeamGainedPoints++;
@@ -90,61 +100,32 @@ public class MessageProcessor {
                     awayTeamLastEventStatus = EventStatuses.W;
                 }
 
-                if (!mapWithTeamStatistics.containsKey(homeTeam)) {
-                    mapWithTeamStatistics.put(homeTeam, new TeamStatistics(homeTeam, homeTeamLastEventStatus, homeTeamSecondLastEventStatus, homeTeamThirdLastEventStatus, homeTeamAverageAmountOfGoalsInAllEvents, homeTeamNumberOfPlayedEvents, homeTeamGainedPoints, homeScore, awayScore));
-                    printSimpleStatistics(mapWithTeamStatistics.get(homeTeam));
-                } else {
-                    TeamStatistics existingObject = mapWithTeamStatistics.get(homeTeam);
+                homeTeamObj.setLastMatchResult(homeTeamLastEventStatus);
+                awayTeamObj.setLastMatchResult(awayTeamLastEventStatus);
 
-                    existingObject.setThirdLastMatchResult(existingObject.getSecondLastMatchResult());
-                    existingObject.setSecondLastMatchResult(existingObject.getLastMatchResult());
-                    existingObject.setLastMatchResult(homeTeamLastEventStatus);
+                homeTeamObj.setSumOfGainedPoints(homeTeamObj.getSumOfGainedPoints() + homeTeamGainedPoints);
+                awayTeamObj.setSumOfGainedPoints(awayTeamObj.getSumOfGainedPoints() + awayTeamGainedPoints);
 
-                    existingObject.setNumberOfPlayedEvents(existingObject.getNumberOfPlayedEvents() + homeTeamNumberOfPlayedEvents);
+                double homeTeamAverageAmountOfGoalsInAllEvents;
+                homeTeamAverageAmountOfGoalsInAllEvents = Math.round(((homeTeamObj.getSumOfGoalsScored() + homeTeamObj.getSumOfGoalsConceded()) * 1.0 / homeTeamObj.getNumberOfPlayedEvents()) * 100.0) / 100.0;
+                homeTeamObj.setAverageAmountOfGoalsInTheTeamEvents(homeTeamAverageAmountOfGoalsInAllEvents);
 
-                    existingObject.setSumOfGainedPoints(existingObject.getSumOfGainedPoints() + homeTeamGainedPoints);
+                double awayTeamAverageAmountOfGoalsInAllEvents;
+                awayTeamAverageAmountOfGoalsInAllEvents = Math.round(((awayTeamObj.getSumOfGoalsScored() + awayTeamObj.getSumOfGoalsConceded()) * 1.0 / awayTeamObj.getNumberOfPlayedEvents()) * 100.0) / 100.0;
+                awayTeamObj.setAverageAmountOfGoalsInTheTeamEvents(awayTeamAverageAmountOfGoalsInAllEvents);
 
-                    existingObject.setSumOfGoalsScored(existingObject.getSumOfGoalsScored() + homeScore);
+                printSimpleStatistics(homeTeamObj);
+                printSimpleStatistics(awayTeamObj);
+                System.out.println();
 
-                    existingObject.setSumOfGoalsConceded(existingObject.getSumOfGoalsConceded() + awayScore);
-
-                    existingObject.setAverageAmountOfGoalsInTheTeamEvents(((existingObject.getSumOfGoalsScored() * 1.0) + existingObject.getSumOfGoalsConceded()) / existingObject.getNumberOfPlayedEvents());
-
-                    printSimpleStatistics(existingObject);
-                }
-
-                if (!mapWithTeamStatistics.containsKey(awayTeam)) {
-                    mapWithTeamStatistics.put(awayTeam, new TeamStatistics(awayTeam, awayTeamLastEventStatus, awayTeamSecondLastEventStatus, awayTeamThirdLastEventStatus, awayTeamAverageAmountOfGoalsInAllEvents, awayTeamNumberOfPlayedEvents, awayTeamGainedPoints, awayScore, homeScore));
-                    printSimpleStatistics(mapWithTeamStatistics.get(awayTeam));
-                } else {
-                    TeamStatistics existingObject = mapWithTeamStatistics.get(awayTeam);
-
-                    existingObject.setThirdLastMatchResult(existingObject.getSecondLastMatchResult());
-                    existingObject.setSecondLastMatchResult(existingObject.getLastMatchResult());
-                    existingObject.setLastMatchResult(awayTeamLastEventStatus);
-
-                    existingObject.setNumberOfPlayedEvents(existingObject.getNumberOfPlayedEvents() + awayTeamNumberOfPlayedEvents);
-
-                    existingObject.setSumOfGainedPoints(existingObject.getSumOfGainedPoints() + awayTeamGainedPoints);
-
-                    existingObject.setSumOfGoalsScored(existingObject.getSumOfGoalsScored() + awayScore);
-
-                    existingObject.setSumOfGoalsConceded(existingObject.getSumOfGoalsConceded() + homeScore);
-
-                    existingObject.setAverageAmountOfGoalsInTheTeamEvents(((existingObject.getSumOfGoalsScored() * 1.0) + existingObject.getSumOfGoalsConceded()) / existingObject.getNumberOfPlayedEvents());
-
-                    printSimpleStatistics(existingObject);
-                    ;
-                }
             } else if (message.getType().equals(MessageType.GET_STATISTICS)) {
                 TeamListForStatistics teamListForStatistics = message.getGetStatistics();
                 List<String> teams = teamListForStatistics.getTeams();
                 for (String team : teams) {
                     printAdvancedStatistics(mapWithTeamStatistics.get(team));
                 }
+                System.out.println();
             }
         }
-
-
     }
 }

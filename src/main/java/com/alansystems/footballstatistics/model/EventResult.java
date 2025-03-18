@@ -1,8 +1,6 @@
 package com.alansystems.footballstatistics.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 
 public class EventResult {
     @JsonProperty("home_team")

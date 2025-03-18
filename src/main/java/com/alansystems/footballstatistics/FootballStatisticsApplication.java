@@ -8,7 +8,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.io.FileReader;
 import java.util.List;
 
 import static com.alansystems.footballstatistics.utils.MessageProcessor.processMessage;
@@ -30,7 +29,7 @@ public class FootballStatisticsApplication implements CommandLineRunner {
         final String FILE_PATH = "src/main/resources/data/messages_2.txt";
 
         List<Message> messages = jsonFileReader.readJsonFromFile(FILE_PATH);
-        messages.forEach(System.out::println);
+        //messages.forEach(System.out::println);
 
         processMessage(messages);
 
