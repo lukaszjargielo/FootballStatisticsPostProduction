@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class Message {
     private MessageType type;
@@ -59,15 +60,12 @@ public class Message {
         if (type != null) {
             sb.append("type=").append(type).append(", ");
         }
-
         if (result != null) {
             sb.append("result=").append(result).append(", ");
         }
-
         if (getStatistics != null) {
             sb.append("getStatistics=").append(getStatistics);
         }
-
         if (sb.charAt(sb.length() - 1) == ' ') {
             sb.delete(sb.length() - 2, sb.length());
         }

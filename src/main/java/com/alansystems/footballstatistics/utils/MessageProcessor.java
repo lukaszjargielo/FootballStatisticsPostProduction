@@ -12,6 +12,9 @@ import static com.alansystems.footballstatistics.model.TeamStatistics.printSimpl
 
 @Component
 public class MessageProcessor {
+
+    private MessageProcessor() {}
+
     static Map<String, TeamStatistics> mapWithTeamStatistics = new HashMap<>();
 
     public static void processMessage(List<Message> messages) {

@@ -5,13 +5,15 @@ public class TeamStatistics {
     private EventStatuses lastEventStatuses;
     private EventStatuses secondLastEventStatuses;
     private EventStatuses thirdLastEventStatuses;
-    private double averageAmountOfGoalsInAllEvents; // sum of scored and conceded
+    private double averageAmountOfGoalsInAllEvents;
     private int numberOfPlayedEvents;
     private int sumOfGainedPoints;
     private int sumOfGoalsScored;
     private int sumOfGoalsConceded;
 
-    public TeamStatistics(String name, EventStatuses lastEventStatuses, EventStatuses secondLastEventStatuses, EventStatuses thirdLastEventStatuses, double averageAmountOfGoalsInTheTeamEvents, int numberOfPlayedEvents, int sumOfGainedPoints, int sumOfGoalsScored, int sumOfGoalsConceded) {
+    public TeamStatistics(String name, EventStatuses lastEventStatuses, EventStatuses secondLastEventStatuses,
+                          EventStatuses thirdLastEventStatuses, double averageAmountOfGoalsInTheTeamEvents,
+                          int numberOfPlayedEvents, int sumOfGainedPoints, int sumOfGoalsScored, int sumOfGoalsConceded) {
         this.name = name;
         this.lastEventStatuses = lastEventStatuses;
         this.secondLastEventStatuses = secondLastEventStatuses;
@@ -134,5 +136,4 @@ public class TeamStatistics {
                 + teamStatistics.getSumOfGainedPoints() + " " + teamStatistics.getSumOfGoalsScored() + " "
                 + teamStatistics.getSumOfGoalsConceded());
     }
-
 }
