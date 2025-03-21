@@ -78,8 +78,8 @@ public class MessageProcessor {
         int homeTeamGainedPoints = 0;
         int awayTeamGainedPoints = 0;
 
-        EventStatuses homeTeamLastEventStatus = EventStatuses.UNDEFINED;
-        EventStatuses awayTeamLastEventStatus = EventStatuses.UNDEFINED;
+        EventStatuses homeTeamLastEventStatus;
+        EventStatuses awayTeamLastEventStatus;
 
         if (homeScore == awayScore) {
             homeTeamGainedPoints++;
