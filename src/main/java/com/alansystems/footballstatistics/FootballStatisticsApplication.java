@@ -3,14 +3,12 @@ package com.alansystems.footballstatistics;
 import com.alansystems.footballstatistics.model.Message;
 import com.alansystems.footballstatistics.utils.JsonFileReader;
 import com.alansystems.footballstatistics.utils.MessageProcessor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
 
-import static com.alansystems.footballstatistics.utils.MessageProcessor.processMessage;
 
 @SpringBootApplication
 public class FootballStatisticsApplication implements CommandLineRunner {
@@ -33,7 +31,7 @@ public class FootballStatisticsApplication implements CommandLineRunner {
 
         List<Message> messages = jsonFileReader.readJsonFromFile(FILE_PATH);
 
-        processMessage(messages);
+        messageProcessor.processMessage(messages);
 
     }
 }

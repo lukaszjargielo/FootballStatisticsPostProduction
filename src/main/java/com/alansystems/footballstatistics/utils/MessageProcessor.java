@@ -13,11 +13,9 @@ import static com.alansystems.footballstatistics.model.TeamStatistics.printSimpl
 @Component
 public class MessageProcessor {
 
-    private MessageProcessor() {}
+      Map<String, TeamStatistics> mapWithTeamStatistics = new HashMap<>();
 
-    static Map<String, TeamStatistics> mapWithTeamStatistics = new HashMap<>();
-
-    public static void processMessage(List<Message> messages) {
+    public void processMessage(List<Message> messages) {
         for (Message message : messages) {
             if (message.getType().equals(MessageType.RESULT)) {
                 handleResultMessage(message.getResult());
@@ -27,7 +25,7 @@ public class MessageProcessor {
         }
     }
 
-    private static void handleResultMessage(EventResult eventResult) {
+    private void handleResultMessage(EventResult eventResult) {
         String homeTeam = eventResult.getHomeTeam();
         String awayTeam = eventResult.getAwayTeam();
         int homeScore = eventResult.getHomeScore();
@@ -46,7 +44,7 @@ public class MessageProcessor {
         System.out.println();
     }
 
-    private static void handleGetStatisticsMessage(TeamListForStatistics teamListForStatistics) {
+    private void handleGetStatisticsMessage(TeamListForStatistics teamListForStatistics) {
         List<String> teams = teamListForStatistics.getTeams();
         for (String team : teams) {
             printAdvancedStatistics(mapWithTeamStatistics.get(team));
@@ -54,7 +52,7 @@ public class MessageProcessor {
         System.out.println();
     }
 
-    private static TeamStatistics processTeam(String teamName, int goalsScored, int goalsConceded, boolean isHomeTeam) {
+    private TeamStatistics processTeam(String teamName, int goalsScored, int goalsConceded, boolean isHomeTeam) {
         TeamStatistics teamObj;
 
         if (!mapWithTeamStatistics.containsKey(teamName)) {
@@ -75,7 +73,7 @@ public class MessageProcessor {
         return teamObj;
     }
 
-    private static void updatePointsAndStatus(TeamStatistics homeTeamObj, TeamStatistics awayTeamObj, int homeScore,
+    private void updatePointsAndStatus(TeamStatistics homeTeamObj, TeamStatistics awayTeamObj, int homeScore,
                                               int awayScore) {
         int homeTeamGainedPoints = 0;
         int awayTeamGainedPoints = 0;
@@ -105,12 +103,12 @@ public class MessageProcessor {
         awayTeamObj.setSumOfGainedPoints(awayTeamObj.getSumOfGainedPoints() + awayTeamGainedPoints);
     }
 
-    private static void updateAverageGoals(TeamStatistics teamObj) {
+    private void updateAverageGoals(TeamStatistics teamObj) {
         double averageGoals = Math.round(((teamObj.getSumOfGoalsScored() + teamObj.getSumOfGoalsConceded()) * 1.0 / teamObj.getNumberOfPlayedEvents()) * 100.0) / 100.0;
         teamObj.setAverageAmountOfGoalsInTheTeamEvents(averageGoals);
     }
 
-    private static void updateTeamStatistics(TeamStatistics teamObj, int goalsScored, int goalsConceded) {
+    private void updateTeamStatistics(TeamStatistics teamObj, int goalsScored, int goalsConceded) {
         teamObj.setThirdLastMatchResult(teamObj.getSecondLastMatchResult());
         teamObj.setSecondLastMatchResult(teamObj.getLastMatchResult());
         teamObj.setNumberOfPlayedEvents(teamObj.getNumberOfPlayedEvents() + 1);
