@@ -31,10 +31,10 @@ public class MessageProcessor {
         int homeScore = eventResult.getHomeScore();
         int awayScore = eventResult.getAwayScore();
 
-        TeamStatistics homeTeamObj = processTeam(homeTeam, homeScore, awayScore, true);
-        TeamStatistics awayTeamObj = processTeam(awayTeam, awayScore, homeScore, false);
+        TeamStatistics homeTeamObj = processTeam(homeTeam, homeScore, awayScore);
+        TeamStatistics awayTeamObj = processTeam(awayTeam, awayScore, homeScore);
 
-        updatePointsAndStatus(homeTeamObj, awayTeamObj, homeScore, awayScore);
+        updatePointsAndEventStatus(homeTeamObj, awayTeamObj, homeScore, awayScore);
 
         updateAverageGoals(homeTeamObj);
         updateAverageGoals(awayTeamObj);
@@ -52,14 +52,14 @@ public class MessageProcessor {
         System.out.println();
     }
 
-    private TeamStatistics processTeam(String teamName, int goalsScored, int goalsConceded, boolean isHomeTeam) {
+    private TeamStatistics processTeam(String teamName, int goalsScored, int goalsConceded) {
         TeamStatistics teamObj;
 
         if (!mapWithTeamStatistics.containsKey(teamName)) {
             teamObj = new TeamStatistics(teamName,
-                    null,
-                    null,
-                    null,
+                    EventStatuses.UNDEFINED,
+                    EventStatuses.UNDEFINED,
+                    EventStatuses.UNDEFINED,
                     0.0,
                     1,
                     0,
@@ -73,13 +73,13 @@ public class MessageProcessor {
         return teamObj;
     }
 
-    private void updatePointsAndStatus(TeamStatistics homeTeamObj, TeamStatistics awayTeamObj, int homeScore,
-                                              int awayScore) {
+    private void updatePointsAndEventStatus(TeamStatistics homeTeamObj, TeamStatistics awayTeamObj, int homeScore,
+                                            int awayScore) {
         int homeTeamGainedPoints = 0;
         int awayTeamGainedPoints = 0;
 
-        EventStatuses homeTeamLastEventStatus = null;
-        EventStatuses awayTeamLastEventStatus = null;
+        EventStatuses homeTeamLastEventStatus = EventStatuses.UNDEFINED;
+        EventStatuses awayTeamLastEventStatus = EventStatuses.UNDEFINED;
 
         if (homeScore == awayScore) {
             homeTeamGainedPoints++;

@@ -121,13 +121,13 @@ public class TeamStatistics {
     public static void printAdvancedStatistics(TeamStatistics teamStatistics) {
         StringBuilder result = new StringBuilder();
 
-        if (teamStatistics.getThirdLastMatchResult() != null) {
+        if (teamStatistics.getThirdLastMatchResult() != EventStatuses.UNDEFINED) {
             result.append(teamStatistics.getThirdLastMatchResult());
         }
-        if (teamStatistics.getSecondLastMatchResult() != null) {
+        if (teamStatistics.getSecondLastMatchResult() != EventStatuses.UNDEFINED) {
             result.append(teamStatistics.getSecondLastMatchResult());
         }
-        if (teamStatistics.getLastMatchResult() != null) {
+        if (teamStatistics.getLastMatchResult() != EventStatuses.UNDEFINED) {
             result.append(teamStatistics.getLastMatchResult());
         }
         System.out.println(teamStatistics.getName() + " " + result + " "
