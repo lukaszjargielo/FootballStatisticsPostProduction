@@ -103,7 +103,7 @@ public class MessageProcessor {
         }
     }
 
-    private void updateAverageGoals(TeamStatistics teamObj) {
+    protected void updateAverageGoals(TeamStatistics teamObj) {
         double averageGoals = Math.round(((teamObj.getSumOfGoalsScored() + teamObj.getSumOfGoalsConceded()) * 1.0 / teamObj.getNumberOfPlayedEvents()) * 100.0) / 100.0;
         teamObj.setAverageAmountOfGoalsInAllEvents(averageGoals);
     }
