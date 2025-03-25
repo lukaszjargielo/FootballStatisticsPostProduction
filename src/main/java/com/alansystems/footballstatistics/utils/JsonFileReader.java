@@ -2,6 +2,7 @@ package com.alansystems.footballstatistics.utils;
 
 import com.alansystems.footballstatistics.model.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -10,16 +11,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+
 @Component
 public class JsonFileReader {
 
     private final ObjectMapper objectMapper;
 
-    public JsonFileReader(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
-
-    public List<Message> readJsonFromFile(String path) {
+        public List<Message> readJsonFromFile(String path) {
         List<Message> messagesList = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {

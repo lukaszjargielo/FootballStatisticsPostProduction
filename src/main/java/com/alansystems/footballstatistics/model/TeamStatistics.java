@@ -11,6 +11,7 @@ import lombok.ToString;
 @ToString
 
 public class TeamStatistics {
+
     private String name;
     private EventStatuses lastEventStatus;
     private EventStatuses secondLastEventStatus;

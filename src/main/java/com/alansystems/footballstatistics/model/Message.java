@@ -16,29 +16,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Message {
+
     private MessageType type;
-
-    /*@JsonInclude(JsonInclude.Include.NON_NULL)*/
     private EventResult result;
-
-    /*@JsonInclude(JsonInclude.Include.NON_NULL)*/
-    /*@JsonProperty("get_statistics")*/
     private TeamListForStatistics getStatistics;
-
-   /* public Message() {
-    }*/
-
-    public Message(MessageType type, EventResult result) {
-        this.type = type;
-        this.result = result;
-    }
-
-    public Message(MessageType type, TeamListForStatistics getStatistics) {
-        this.type = type;
-        this.getStatistics = getStatistics;
-    }
-
-
 
     @Override
     public String toString() {

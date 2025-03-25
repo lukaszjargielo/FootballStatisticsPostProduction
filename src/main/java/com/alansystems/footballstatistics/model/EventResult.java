@@ -10,16 +10,10 @@ import lombok.*;
 @ToString
 
 public class EventResult {
-    /*@JsonProperty("home_team")*/
-    private /*final*/ String homeTeam;
 
-    /*@JsonProperty("away_team")*/
-    private /*final*/ String awayTeam;
-
-    /*@JsonProperty("home_score")*/
-    private /*final*/ Integer homeScore;
-
-    /*@JsonProperty("away_score")*/
-    private /*final*/ Integer awayScore;
+    private  String homeTeam;
+    private  String awayTeam;
+    private  Integer homeScore;
+    private  Integer awayScore;
 
 }

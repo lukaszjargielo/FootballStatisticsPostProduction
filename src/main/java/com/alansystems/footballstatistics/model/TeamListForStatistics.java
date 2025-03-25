@@ -12,7 +12,7 @@ import java.util.List;
 @ToString
 
 public class TeamListForStatistics {
-    @JsonProperty("teams")
+
     private List<String> teams;
 
 }
