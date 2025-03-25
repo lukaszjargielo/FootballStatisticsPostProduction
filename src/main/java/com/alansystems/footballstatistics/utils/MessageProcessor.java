@@ -13,7 +13,7 @@ import static com.alansystems.footballstatistics.model.TeamStatistics.printSimpl
 @Component
 public class MessageProcessor {
 
-      Map<String, TeamStatistics> mapWithTeamStatistics = new HashMap<>();
+    Map<String, TeamStatistics> mapWithTeamStatistics = new HashMap<>();
 
     public void processMessage(List<Message> messages) {
         for (Message message : messages) {
@@ -94,26 +94,26 @@ public class MessageProcessor {
             awayTeamGainedPoints += 3;
             homeTeamLastEventStatus = EventStatuses.L;
             awayTeamLastEventStatus = EventStatuses.W;
+
+            homeTeamObj.setLastEventStatus(homeTeamLastEventStatus);
+            awayTeamObj.setLastEventStatus(awayTeamLastEventStatus);
+
+            homeTeamObj.setSumOfGainedPoints(homeTeamObj.getSumOfGainedPoints() + homeTeamGainedPoints);
+            awayTeamObj.setSumOfGainedPoints(awayTeamObj.getSumOfGainedPoints() + awayTeamGainedPoints);
         }
-
-        homeTeamObj.setLastMatchResult(homeTeamLastEventStatus);
-        awayTeamObj.setLastMatchResult(awayTeamLastEventStatus);
-
-        homeTeamObj.setSumOfGainedPoints(homeTeamObj.getSumOfGainedPoints() + homeTeamGainedPoints);
-        awayTeamObj.setSumOfGainedPoints(awayTeamObj.getSumOfGainedPoints() + awayTeamGainedPoints);
     }
 
     private void updateAverageGoals(TeamStatistics teamObj) {
         double averageGoals = Math.round(((teamObj.getSumOfGoalsScored() + teamObj.getSumOfGoalsConceded()) * 1.0 / teamObj.getNumberOfPlayedEvents()) * 100.0) / 100.0;
-        teamObj.setAverageAmountOfGoalsInTheTeamEvents(averageGoals);
+        teamObj.setAverageAmountOfGoalsInAllEvents(averageGoals);
     }
 
     private void updateTeamStatistics(TeamStatistics teamObj, int goalsScored, int goalsConceded) {
-        teamObj.setThirdLastMatchResult(teamObj.getSecondLastMatchResult());
-        teamObj.setSecondLastMatchResult(teamObj.getLastMatchResult());
+        teamObj.setThirdLastEventStatus(teamObj.getSecondLastEventStatus());
+        teamObj.setSecondLastEventStatus(teamObj.getLastEventStatus());
         teamObj.setNumberOfPlayedEvents(teamObj.getNumberOfPlayedEvents() + 1);
         teamObj.setSumOfGoalsScored(teamObj.getSumOfGoalsScored() + goalsScored);
         teamObj.setSumOfGoalsConceded(teamObj.getSumOfGoalsConceded() + goalsConceded);
     }
-
 }
+

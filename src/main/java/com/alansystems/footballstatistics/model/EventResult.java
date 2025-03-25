@@ -1,6 +1,15 @@
 package com.alansystems.footballstatistics.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 
 public class EventResult {
     @JsonProperty("home_team")
@@ -15,36 +24,4 @@ public class EventResult {
     @JsonProperty("away_score")
     private final Integer awayScore;
 
-    public EventResult(String homeTeam, String awayTeam, int homeScore, int awayScore) {
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.homeScore = homeScore;
-        this.awayScore = awayScore;
-    }
-
-    public String getHomeTeam() {
-        return homeTeam;
-    }
-
-    public String getAwayTeam() {
-        return awayTeam;
-    }
-
-    public Integer getHomeScore() {
-        return homeScore;
-    }
-
-    public Integer getAwayScore() {
-        return awayScore;
-    }
-
-    @Override
-    public String toString() {
-        return "EventResult{" +
-                "homeTeam='" + homeTeam + '\'' +
-                ", awayTeam='" + awayTeam + '\'' +
-                ", homeScore=" + homeScore +
-                ", awayScore=" + awayScore +
-                '}';
-    }
 }

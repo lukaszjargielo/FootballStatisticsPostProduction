@@ -1,4 +1,4 @@
-
+q
 ## Enum `EventStatuses` symbols explanation:
 - **W** - win
 - **L** - lose

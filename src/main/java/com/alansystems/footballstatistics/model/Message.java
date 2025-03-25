@@ -2,8 +2,12 @@ package com.alansystems.footballstatistics.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
+@Getter
+@Setter
 
 @Component
 public class Message {
@@ -29,29 +33,7 @@ public class Message {
         this.getStatistics = teamStatistics;
     }
 
-    public MessageType getType() {
-        return type;
-    }
 
-    public void setType(MessageType type) {
-        this.type = type;
-    }
-
-    public EventResult getResult() {
-        return result;
-    }
-
-    public void setResult(EventResult result) {
-        this.result = result;
-    }
-
-    public TeamListForStatistics getGetStatistics() {
-        return getStatistics;
-    }
-
-    public void setGetStatistics(TeamListForStatistics getTeamStatistics) {
-        this.getStatistics = getTeamStatistics;
-    }
 
     @Override
     public String toString() {
