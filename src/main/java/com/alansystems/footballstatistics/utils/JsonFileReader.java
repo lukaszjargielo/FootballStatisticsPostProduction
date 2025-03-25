@@ -13,10 +13,10 @@ import java.util.List;
 @Component
 public class JsonFileReader {
 
-    private final ObjectMapper mapper;
+    private final ObjectMapper objectMapper;
 
-    public JsonFileReader(ObjectMapper mapper) {
-        this.mapper = mapper;
+    public JsonFileReader(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
     }
 
     public List<Message> readJsonFromFile(String path) {
@@ -27,7 +27,7 @@ public class JsonFileReader {
 
             while ((line = reader.readLine()) != null) {
                 try {
-                    Message message = mapper.readValue(line, Message.class);
+                    Message message = objectMapper.readValue(line, Message.class);
                     messagesList.add(message);
 
                 } catch (IOException e) {

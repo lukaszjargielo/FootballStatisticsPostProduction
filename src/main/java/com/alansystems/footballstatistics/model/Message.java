@@ -1,36 +1,41 @@
 package com.alansystems.footballstatistics.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Component
 public class Message {
     private MessageType type;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    /*@JsonInclude(JsonInclude.Include.NON_NULL)*/
     private EventResult result;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty("get_statistics")
+    /*@JsonInclude(JsonInclude.Include.NON_NULL)*/
+    /*@JsonProperty("get_statistics")*/
     private TeamListForStatistics getStatistics;
 
-    public Message() {
+   /* public Message() {
+    }*/
+
+    public Message(MessageType type, EventResult result) {
+        this.type = type;
+        this.result = result;
     }
 
-    public Message(MessageType type, EventResult eventResult) {
+    public Message(MessageType type, TeamListForStatistics getStatistics) {
         this.type = type;
-        this.result = eventResult;
-    }
-
-    public Message(MessageType type, TeamListForStatistics teamStatistics) {
-        this.type = type;
-        this.getStatistics = teamStatistics;
+        this.getStatistics = getStatistics;
     }
 
 
