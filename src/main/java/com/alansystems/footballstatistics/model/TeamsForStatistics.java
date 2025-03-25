@@ -1,6 +1,5 @@
 package com.alansystems.footballstatistics.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 @Setter
 @ToString
 
-public class TeamListForStatistics {
+public class TeamsForStatistics {
 
     private List<String> teams;
 

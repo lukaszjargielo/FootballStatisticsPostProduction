@@ -1,6 +1,7 @@
 package com.alansystems.footballstatistics.utils;
 
 import com.alansystems.footballstatistics.model.*;
+import lombok.EqualsAndHashCode;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Map;
 
 import static com.alansystems.footballstatistics.model.TeamStatistics.printAdvancedStatistics;
 import static com.alansystems.footballstatistics.model.TeamStatistics.printSimpleStatistics;
+@EqualsAndHashCode
 
 @Component
 public class MessageProcessor {
@@ -17,9 +19,9 @@ public class MessageProcessor {
 
     public void processMessage(List<Message> messages) {
         for (Message message : messages) {
-            if (message.getType().equals(MessageType.RESULT)) {
+            if (message.getType() == (MessageType.RESULT)) {
                 handleResultMessage(message.getResult());
-            } else if (message.getType().equals(MessageType.GET_STATISTICS)) {
+            } else if (message.getType() == (MessageType.GET_STATISTICS)) {
                 handleGetStatisticsMessage(message.getGetStatistics());
             }
         }
@@ -44,8 +46,8 @@ public class MessageProcessor {
         System.out.println();
     }
 
-    private void handleGetStatisticsMessage(TeamListForStatistics teamListForStatistics) {
-        List<String> teams = teamListForStatistics.getTeams();
+    private void handleGetStatisticsMessage(TeamsForStatistics teamsForStatistics) {
+        List<String> teams = teamsForStatistics.getTeams();
         for (String team : teams) {
             printAdvancedStatistics(mapWithTeamStatistics.get(team));
         }

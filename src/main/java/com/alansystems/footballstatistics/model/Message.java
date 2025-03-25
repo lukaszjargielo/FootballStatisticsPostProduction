@@ -1,8 +1,5 @@
 package com.alansystems.footballstatistics.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +16,7 @@ public class Message {
 
     private MessageType type;
     private EventResult result;
-    private TeamListForStatistics getStatistics;
+    private TeamsForStatistics getStatistics;
 
     @Override
     public String toString() {

@@ -19,6 +19,7 @@ public class JsonFileReader {
     private final ObjectMapper objectMapper;
 
         public List<Message> readJsonFromFile(String path) {
+
         List<Message> messagesList = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
