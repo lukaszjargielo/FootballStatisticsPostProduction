@@ -94,13 +94,14 @@ public class MessageProcessor {
             awayTeamGainedPoints += 3;
             homeTeamLastEventStatus = EventStatuses.L;
             awayTeamLastEventStatus = EventStatuses.W;
+        }
 
             homeTeamObj.setLastEventStatus(homeTeamLastEventStatus);
             awayTeamObj.setLastEventStatus(awayTeamLastEventStatus);
 
             homeTeamObj.setSumOfGainedPoints(homeTeamObj.getSumOfGainedPoints() + homeTeamGainedPoints);
             awayTeamObj.setSumOfGainedPoints(awayTeamObj.getSumOfGainedPoints() + awayTeamGainedPoints);
-        }
+
     }
 
     protected void updateAverageGoals(TeamStatistics teamObj) {
