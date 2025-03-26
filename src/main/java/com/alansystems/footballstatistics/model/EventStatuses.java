@@ -4,5 +4,5 @@ public enum EventStatuses {
     W,
     L,
     D,
-    UNDEFINED,
+    NONE,
 }

@@ -1,7 +1,7 @@
-package com.alansystems.footballstatistics.repository;
+/*package com.alansystems.footballstatistics.repository;
 
 import com.alansystems.footballstatistics.model.Message;
 import org.springframework.data.repository.CrudRepository;
 
-public interface MessageAggregationRepository extends CrudRepository<Integer, Message> {
-}
+public interface MessageAggregationRepository extends CrudRepository<Message, Integer> {
+}*/

@@ -1,6 +1,7 @@
 package com.alansystems.footballstatistics.utils;
 
 import com.alansystems.footballstatistics.model.TeamStatistics;
+import com.alansystems.footballstatistics.service.ResultService;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -27,9 +28,9 @@ public class MessageProcessorTest {
         when(mockTeamStatistics.getSumOfGoalsScored()).thenReturn(goalsScored);
         when(mockTeamStatistics.getSumOfGoalsConceded()).thenReturn(goalsConceded);
 
-        MessageProcessor messageProcessor = new MessageProcessor();
+        ResultService resultService = new ResultService();
 
-        messageProcessor.updateAverageGoals(mockTeamStatistics);
+        resultService.updateAverageGoals(mockTeamStatistics);
 
         verify(mockTeamStatistics, times(1)).setAverageAmountOfGoalsInAllEvents(expectedAverageGoals);
     }
